@@ -14,11 +14,7 @@
             firstName: null,
             email: null,
         },
-        contacts: [
-        //    { id: '1', firstName: 'Per', email: 'per@mail.com' },
-        //    { id: '2', firstName: 'Pål', email: 'paal@mail.com' },
-        //    { id: '3', firstName: 'Espen', email: 'espen@mail.com' },
-        ],
+        contacts: [],
     };
 
     getData();
@@ -61,7 +57,7 @@
                     ${p.email}
                     <button onclick="editPerson('${p.id}')">rediger</button>
                     <button onclick="deletePerson('${p.id}')">x</button>
-                </li >
+                </li>
                 `).join('');
     }
 

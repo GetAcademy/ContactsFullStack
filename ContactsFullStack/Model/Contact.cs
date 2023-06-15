@@ -2,6 +2,8 @@
 {
     public class Contact
     {
+        // { id: '1', firstName: 'Per', email: 'per@mail.com' }
+
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string Email { get; set; }
