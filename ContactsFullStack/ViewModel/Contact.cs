@@ -4,15 +4,16 @@
     {
         // { id: '1', firstName: 'Per', email: 'per@mail.com' }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string Email { get; set; }
 
         public Contact()
         {
+            Id = Guid.NewGuid();
         }
 
-        public Contact(int id, string firstName, string email)
+        public Contact(Guid id, string firstName, string email)
         {
             Id = id;
             FirstName = firstName;

@@ -1,1 +1,17 @@
-[{"Id":1,"FirstName":"Terje","Email":"terje@getacademy.no"},{"Id":2,"FirstName":"Per","Email":"per@getacademy.no"},{"Id":3,"FirstName":"P\u00E5l","Email":"p\u00E5l@getacademy.no"},{"Id":0,"FirstName":"ersedf","Email":"sdfdsz"}]
+[
+  {
+    "Id": "ce148fbe-0b74-11ee-be56-0242ac120001",
+    "FirstName": "Per",
+    "Email": "per@getacademy.no"
+  },
+  {
+    "Id": "ce148fbe-0b74-11ee-be56-0242ac120002",
+    "FirstName": "P\u00E5l",
+    "Email": "p\u00E5l@getacademy.no"
+  },
+  {
+    "Id": "1d219683-acf5-4f56-beb8-12b6ab101262",
+    "FirstName": "Anders K\u00E5re",
+    "Email": "anders@mail.com"
+  }
+]

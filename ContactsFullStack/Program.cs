@@ -9,17 +9,31 @@ var filename = "contacts.json";
 app.MapGet("/contact", ReadFromFile);
 app.MapPost("/contact", (Contact contact) =>
 {
-    var contacts = ReadFromFile().ToList();
+    var contacts = ReadFromFile();
     contacts.Add(contact);
+    SaveToFile(contacts);
+});
+app.MapPut("/contact", (Contact contact) =>
+{
+    var contacts = ReadFromFile();
+    var theContact = contacts.FirstOrDefault(c=>c.Id==contact.Id);
+    theContact.Email = contact.Email;
+    theContact.FirstName = contact.FirstName;
+    SaveToFile(contacts);
+});
+app.MapDelete("/contact/{id}", (Guid id) =>
+{
+    var contacts = ReadFromFile();
+    contacts.RemoveAll(c => c.Id == id);
     SaveToFile(contacts);
 });
 app.UseStaticFiles();
 app.Run();
 
-Contact[] ReadFromFile()
+List<Contact> ReadFromFile()
 {
     var json = File.ReadAllText(filename);
-    return JsonSerializer.Deserialize<Contact[]>(json);
+    return JsonSerializer.Deserialize<Contact[]>(json).ToList();
 }
 
 void SaveToFile(IEnumerable<Contact> contacts)
@@ -28,16 +42,12 @@ void SaveToFile(IEnumerable<Contact> contacts)
     File.WriteAllText(filename, json);
 }
 
-
-
 /*
- * Pause til 14:03
- *
  * CRUD
  * Create <-
  * Read <- v1: fra hardkodet data, v2: fra fil
- * Update
- * Delete
+ * Update <-
+ * Delete <-
  *
  * id: int vs guid
  *
