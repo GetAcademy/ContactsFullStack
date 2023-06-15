@@ -5,32 +5,60 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
 var filename = "contacts.json";
-if (!File.Exists(filename))
-{
-    var contacts = new Contact[]{
-        new Contact(1, "Terje", "terje@getacademy.no"),
-        new Contact(2, "Per", "per@getacademy.no"),
-    };
-    var json = JsonSerializer.Serialize(contacts);
-    File.WriteAllText(filename, json);
-}
 
-app.MapGet("/contact", () =>
+app.MapGet("/contact", ReadFromFile);
+app.MapPost("/contact", (Contact contact) =>
 {
-    var json = File.ReadAllText(filename);
-    return JsonSerializer.Deserialize<Contact[]>(json);
+    var contacts = ReadFromFile().ToList();
+    contacts.Add(contact);
+    SaveToFile(contacts);
 });
 app.UseStaticFiles();
 app.Run();
 
+Contact[] ReadFromFile()
+{
+    var json = File.ReadAllText(filename);
+    return JsonSerializer.Deserialize<Contact[]>(json);
+}
+
+void SaveToFile(IEnumerable<Contact> contacts)
+{
+    var json = JsonSerializer.Serialize(contacts);
+    File.WriteAllText(filename, json);
+}
+
+
+
 /*
+ * Pause til 14:03
+ *
  * CRUD
- * Create
- * Read <-
+ * Create <-
+ * Read <- v1: fra hardkodet data, v2: fra fil
  * Update
  * Delete
+ *
+ * id: int vs guid
  *
  * Lagre til og lese fra fil // JSON
  *
  * Peke på materiale på Moodle
+ */
+
+
+
+
+/*
+ * Kode for å intitalisere json-fil:
+ 
+    if (!File.Exists(filename))
+    {
+        var contacts = new Contact[]{
+            new Contact(1, "Terje", "terje@getacademy.no"),
+            new Contact(2, "Per", "per@getacademy.no"),
+        };
+        var json = JsonSerializer.Serialize(contacts);
+        File.WriteAllText(filename, json);
+    } 
  */

@@ -44,7 +44,7 @@
                     value="${model.inputs.email || ''}"
                 /><br/>
 
-                <button onclick="creatOrUpdatePerson()">
+                <button onclick="createOrUpdatePerson()">
                     ${model.inputs.id == null ? 'Lag ny' : 'Rediger'}
                 </button>
             `;
@@ -61,7 +61,7 @@
                 `).join('');
     }
 
-    function creatOrUpdatePerson() {
+    function createOrUpdatePerson() {
         if (model.inputs.id == null) createPerson();
         else updatePerson();
         model.inputs = {
@@ -72,13 +72,13 @@
         updateView();
     }
 
-    function createPerson() {
+    async function createPerson() {
         const person = {
-            id: Math.random().toString(16).slice(2),
             firstName: model.inputs.firstName,
             email: model.inputs.email,
         };
-        model.contacts.push(person);
+        const response = await axios.post('/contact', person);
+        getData();
     }
 
     function updatePerson() {
